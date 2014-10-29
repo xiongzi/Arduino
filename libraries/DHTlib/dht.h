@@ -50,6 +50,7 @@ public:
     // DHTLIB_ERROR_ACK_H
     int read11(uint8_t pin);
     int read(uint8_t pin);
+    int readInt(uint8_t pin);
 
     inline int read21(uint8_t pin) { return read(pin); };
     inline int read22(uint8_t pin) { return read(pin); };
@@ -58,6 +59,9 @@ public:
 
     double humidity;
     double temperature;
+
+    uint16_t humidityInt;
+    uint16_t temperatureInt;
 
 private:
     uint8_t bits[5];  // buffer to receive data

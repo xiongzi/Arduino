@@ -89,6 +89,27 @@ int dht::read(uint8_t pin)
     return result;
 }
 
+int dht::readInt(uint8_t pin) {
+    // READ VALUES
+    int result = _readSensor(pin, DHTLIB_DHT_WAKEUP);
+
+    // these bits are always zero, masking them reduces errors.
+    bits[0] &= 0x03;
+    bits[2] &= 0x83;
+
+    // CONVERT AND STORE
+    humidityInt = word(bits[0], bits[1]);
+    temperatureInt = word(bits[2] & 0x7F, bits[3]);
+
+    // TEST CHECKSUM
+    uint8_t sum = bits[0] + bits[1] + bits[2] + bits[3];
+    if (bits[4] != sum)
+    {
+        return DHTLIB_ERROR_CHECKSUM;
+    }
+    return result;
+}
+
 /////////////////////////////////////////////////////
 //
 // PRIVATE
