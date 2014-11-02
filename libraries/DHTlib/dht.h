@@ -62,6 +62,7 @@ public:
 
     uint16_t humidityInt;
     uint16_t temperatureInt;
+	uint8_t checksum;
 
 private:
     uint8_t bits[5];  // buffer to receive data

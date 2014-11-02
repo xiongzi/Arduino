@@ -102,8 +102,8 @@ int dht::readInt(uint8_t pin) {
     temperatureInt = word(bits[2] & 0x7F, bits[3]);
 
     // TEST CHECKSUM
-    uint8_t sum = bits[0] + bits[1] + bits[2] + bits[3];
-    if (bits[4] != sum)
+    checksum = bits[0] + bits[1] + bits[2] + bits[3];
+    if (bits[4] != checksum)
     {
         return DHTLIB_ERROR_CHECKSUM;
     }
